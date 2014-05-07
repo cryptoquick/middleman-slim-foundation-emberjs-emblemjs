@@ -47,7 +47,7 @@ When I could not locate the stack I wanted, I built it.  Examine the folders, ge
 * [middleman-zurb-foundation](https://github.com/axyz/middleman-zurb-foundation) :: Merged Foundation.
 * [middleman-ember-template](https://github.com/GutenYe/middleman-ember-template) :: Merged Ember.
 * [page pipeline](https://github.com/middleman/middleman/issues/453#issuecomment-42276716) :: Process + Ignore pages.
-* [@arcovion](https://github.com/Arcovion) :: Ty 4 answer my bug reports.
+* [@arcovion](https://github.com/Arcovion) :: Thank you for answering all of my bug reports.
 
 ***
 Produced and maintained by [@chrishough](http://twitter.com/chrishough).

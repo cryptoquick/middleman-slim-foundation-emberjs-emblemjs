@@ -1,0 +1,152 @@
+@mixin text-emphasis{font-weight: bold;}
+@mixin text-capitalize{text-transform:capitalize;}
+@mixin text-uppercase{text-transform:uppercase;}
+@mixin text-lowercase{text-transform:lowercase;}
+@mixin text-spacer-left{padding-left: 0.4em;}
+@mixin text-spacer-right{padding-right: 0.4em;}
+.text-emphasis{@include text-emphasis();}
+.text-capitalize{@include text-capitalize();}
+.text-uppercase{@include text-uppercase();}
+.text-lowercase{@include text-lowercase();}
+.text-spacer-right{@include text-spacer-right();}
+.text-spacer-left{@include text-spacer-left();}
+// ***************************************************************************************** */
+@mixin box-shadow($top: 0, $left: 0, $blur: 0.3em, $color: rgba(0,0,0,0.5), $inset:"") {
+  -webkit-box-shadow: $top $left $blur $color #{$inset};
+  -moz-box-shadow: $top $left $blur $color #{$inset};
+  box-shadow: $top $left $blur $color #{$inset};
+}
+// ***************************************************************************************** */
+// Round corner at position by amount.
+@mixin round-corner($position, $amount: $global-radius){
+  border-#{$position}-radius: $amount;
+  -webkit-border-#{$position}-radius: $amount;
+}
+@mixin round-corner-mozilla($position, $amount: $global-radius){
+  -moz-border-radius-#{$position}: $amount;
+}
+// Round left corners by amount
+@mixin round-left-corners($amount: $global-radius){
+  @include round-corner("top-left", $amount);
+  @include round-corner("bottom-left", $amount);
+  @include round-corner-mozilla("topleft", $amount);
+  @include round-corner-mozilla("bottomleft", $amount);
+}
+// Round right corners by amount
+@mixin round-right-corners($amount: $global-radius){
+  @include round-corner("top-right", $amount);
+  @include round-corner("bottom-right", $amount);
+  @include round-corner-mozilla("topright", $amount);
+  @include round-corner-mozilla("bottomright", $amount);
+}
+// Round top corners by amount
+@mixin round-top-corners($amount: 5px){
+  @include round-corner("top-left", $amount);
+  @include round-corner("top-right", $amount);
+  @include round-corner-mozilla("topleft", $amount);
+  @include round-corner-mozilla("topright", $amount);
+}
+// Round bottom corners by amount
+@mixin round-bottom-corners($amount: $global-radius){
+  @include round-corner("bottom-left", $amount);
+  @include round-corner("bottom-right", $amount);
+  @include round-corner-mozilla("bottomleft", $amount);
+  @include round-corner-mozilla("bottomright", $amount);
+}
+// Round all corners by amount
+@mixin round-corners($amount: $global-radius){
+  border-radius: $amount;
+  -moz-border-radius: $amount;
+  -webkit-border-radius: $amount;
+}
+// ***************************************************************************************** */
+@mixin border($size: 0.1em, $type: solid, $color: $app-color-code-5) {
+  border: $size $type $color;
+}
+// ***************************************************************************************** */
+@mixin gradient($from, $to) {
+  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+  background: -moz-linear-gradient(top,  $from, $to);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+}
+// ***************************************************************************************** */
+@mixin transform($params) {
+  -webkit-transform: $params;
+  -moz-transform:    $params;
+  transform:         $params;
+}
+// ***************************************************************************************** */
+@mixin opacity($opacity: 0.5) {
+  filter:         alpha(opacity=($opacity * 100));
+  -ms-filter:     "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + ($opacity * 100) + ")";
+  -moz-opacity:   $opacity;
+  -khtml-opacity: $opacity;
+  opacity:        $opacity;
+}
+// ***************************************************************************************** */
+@mixin transparent($color: $app-color-code-5, $alpha: 0.5) {
+  $rgba: rgba($color, $alpha);
+  $ie-hex-str: ie-hex-str($rgba);
+  background-color: transparent;
+  background-color: $rgba;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+  zoom: 1;
+}
+// ***************************************************************************************** */
+@mixin background($imgpath, $position: 0 0, $repeat: no-repeat, $height: 0, $color: false, $cover: false, $fixed: false) {
+  background: {
+    image: asset-url($imgpath);
+    repeat: $repeat;
+    position: $position;
+  }
+  @if $color {
+    background-color: $color;
+  }
+  @if $height > 0 {
+    height: $height;
+  }
+  @if $cover {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+  @if $fixed {
+    background-attachment: fixed;
+  }
+}
+// ***************************************************************************************** */
+@mixin circle($color: $app-color-code-5, $bgcolor: $app-color-code-6, $height: 2em, $width: 2em, $size: 2em, $radius: 2em, $lineheight: 2em){
+  line-height:$lineheight;
+  border-radius:$radius;
+  font-size:$size;
+  height:$height;
+  width:$width;
+  color:$color;
+  background:$bgcolor;
+  text-align:center;
+}
+// ***************************************************************************************** */
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+// ***************************************************************************************** */
+@mixin cursor($cursor: pointer) {
+  cursor: $cursor;
+}
+// ***************************************************************************************** */
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}

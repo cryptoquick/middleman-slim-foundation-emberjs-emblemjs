@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title
+      |Save Time!
+    / Asset Pipeline CSS Files
+    == stylesheet_link_tag "application"
+    / Utilize the Asset Pipeline to load various JS libraries 1st
+    == javascript_include_tag "preloader"
+  body
+    / Ember Application Launcher
+    |<script type="text/x-handlebars">{{outlet}}</script>
+    / Asset Pipeline JS Files
+    == javascript_include_tag "application"
